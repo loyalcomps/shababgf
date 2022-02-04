@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="sale_stitching_report_wizard" model="ir.ui.view">
+        <field name="name">Sales Stitching Report</field>
+        <field name="model">sale.stitching.report</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <form string="Sales stitching Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+
+                <group>
+                    <field name="operating_unit"/>
+
+                    <field name="selection_user"/>
+                </group>
+
+                 <group>
+                    <group>
+                        <field name="cutting_user" attrs="{'invisible': [('selection_user', '!=','cutting_user')]}"/>
+                    </group>
+                    <group>
+                        <field name="cutting_status" widget="radio" attrs="{'invisible': [('cutting_user', '=', False)]}"/>
+                    </group>
+                </group>
+
+                 <group>
+                    <group>
+                       <field name="stitching_user" attrs="{'invisible': [('selection_user', '!=','stitching_user')]}"/>
+                    </group>
+                    <group>
+                         <field name="stitching_status" widget="radio" attrs="{'invisible': [('stitching_user', '=', False)]}"/>
+                    </group>
+                </group>
+<!--                <group>-->
+<!--                    <field name="cutting_user"/>-->
+<!--                    <field name="stitching_user"/>-->
+<!--                </group>-->
+
+<!--                <group>-->
+<!--                    <field name="cutting_status" widget="radio" attrs="{'invisible': [('cutting_user', '=', False)]}"/>-->
+<!--                    <field name="stitching_status" widget="radio" attrs="{'invisible': [('stitching_user', '=', False)]}"/>-->
+<!--                </group>-->
+
+
+                <footer>
+                    <button name="print_report" string="Print" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_stitching_report_wizard" model="ir.actions.act_window">
+        <field name="name">Sales Stitching Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.stitching.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sale_stitching_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_sale_stitching_report_wizard"
+              id="menu_sale_stitching_report_wizard"
+              parent="sale.menu_sale_report"/>
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+
+
+        <template id="arabic_invoice_print_report_assets_common_temp"  inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+<!--                <link rel='stylesheet' href="/jodha_invoice_template/static/src/scss/almaraifont.scss" type="text/scss"/>-->
+                <link rel='stylesheet' href="/arabic_invoice_print/static/src/scss/arialfont.scss" type="text/scss"/>
+<!--                <link rel='stylesheet' href="/jodha_invoice_template/static/src/scss/elmessiri.scss" type="text/scss"/>-->
+            </xpath>
+        </template>
+    </data>
+</odoo>

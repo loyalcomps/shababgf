@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+
+        <template id="deliver_note_print_inherit" inherit_id = "delivery_note_print.delivery_note_template_document" >
+        <xpath expr="//div[hasclass('page')]/div/table/thead/tr/th[2]" position="after">
+
+             <th width="10px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:right">
+                                        <span class="arabic-font">الطول </span>
+                                        <br/>
+                                        <span class="en-font">Length(CM)</span>
+                                    </th>
+
+             <th width="9px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:right">
+                                        <span class="arabic-font">عرض </span>
+                                        <br/>
+                                        <span class="en-font">Width(CM)</span>
+                                    </th>
+
+            <th width="5px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:right">
+                                        <span class="arabic-font">قطع</span>
+                                        <br/>
+                                        <span class="en-font">Pcs</span>
+                                    </th>
+
+
+
+        </xpath>
+
+              <xpath expr="//div[hasclass('page')]/div/table/tbody/tr/td[2]" position="after">
+                   <td class="text-right en-font" style="text-align:right;">
+                          <t t-esc="l.length"/>
+                   </td>
+
+                   <td class="text-right en-font" style="text-align:right;">
+                          <t t-esc="l.width"/>
+                   </td>
+
+                   <td class="text-right en-font" style="text-align:right;">
+                          <t t-esc="l.pcs"/>
+                   </td>
+              </xpath>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+   <report
+                id="action_report_by_stitching"
+                string="Stitching Sale Report"
+                model="sale.stitching.report"
+                report_type="qweb-pdf"
+                file="stitching_sale_report.sale_stitching_report_view"
+                name="stitching_sale_report.sale_stitching_report_view"
+        />
+
+      <record id="paperformat_stitching_sale_print_with_header" model="report.paperformat">
+            <field name="name">stitching sale Print</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_report_by_stitching" model="ir.actions.report">
+            <field name="paperformat_id" ref="stitching_sale_report.paperformat_stitching_sale_print_with_header"/>
+        </record>
+
+
+  </data>
+</odoo>

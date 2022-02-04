@@ -1,0 +1,24 @@
+<odoo>
+  <data>
+    <template id="arabic_zakta_qr_code" inherit_id="arabic_invoice_print.arabic_invoice_template_document">
+            <xpath expr="//t[@t-if='o.time_stamp']" position="replace">
+                  <t t-if="o.time_stamp">
+
+                      <t t-if="'out_refund' in o.move_type">
+                          <div class="en-font" style="height: 100px;float:right;width:8%;font-size: 11px;margin-left:125px;margin-top:-120px;">
+                              <img  t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.zakta_qr_code_str, 600, 100)" style="width:117px;height:120px;float:right;" alt="Barcode"/>
+                                </div>
+                      </t>
+
+                      <t t-if="'out_invoice' in o.move_type">
+
+                          <div class="en-font" style="height: 100px;float:right;width:8%;font-size: 11px;margin-left:125px;margin-top:-120px;">
+                              <img  t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.zakta_qr_code_str, 600, 100)" style="width:117px;height:120px;float:right;" alt="Barcode"/>
+                          </div>
+                      </t>
+                  </t>
+            </xpath>
+
+        </template>
+  </data>
+</odoo>

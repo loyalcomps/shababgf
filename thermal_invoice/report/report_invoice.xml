@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document">
+            <t t-call="thermal_invoice.small_external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="page"
+                     style="margin-top:10px;text-align: left;width: 400px;background-color: white;font-size: 14px;display: solid 1px rgb(220,220,220);">
+                    <t t-if="not o and doc">
+                        <t t-set="o" t-value="doc"/>
+                    </t>
+                    <t t-if="o and 'company_id' in o">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-if="not o or not 'company_id' in o">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                    <div style="border-bottom:1pt dashed black;text-align:center">
+                        <div style="font-size:18pt;font-weight:bold">
+                            <t t-esc="company.name"/>
+                            <br/>
+                        </div>
+                        <t t-if="company.street"><span t-esc="company.street"/>,
+                        </t>
+                        <t t-if="company.street2"><span t-esc="company.street2"/>,
+                        </t>
+                        <t t-if="company.city"><span t-esc="company.city"/>,
+                        </t>
+                        <t t-if="company.state_id"><span t-esc="company.state_id.name"/>.
+                        </t>
+                        <br/>
+                        <table style="margin-top:5pt;padding:5pt;">
+                            <tr t-if="company.vat">
+                                <td>VAT Reg. No :</td>
+                                <td>
+                                    <t t-esc="company.vat" style="text-align:right"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <table style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:9pt">
+                        <colgroup>
+                            <col width='24%'/>
+                            <col width='1%'/>
+                            <col width='49%'/>
+                            <col width='1%'/>
+                            <col width='25%'/>
+                        </colgroup>
+                        <tr t-if="o.partner_id">
+                            <td style="padding-top:3pt;padding-bottom:3pt">Customer</td>
+                            <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
+                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
+                                <span t-field="o.partner_id"
+                                      t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                                ,
+                                <t t-if="o.partner_id.street"><span t-esc="o.partner_id.street"/>,
+                                </t>
+                                <t t-if="o.partner_id.street2"><span t-esc="o.partner_id.street2"/>,
+                                </t>
+                                <t t-if="o.partner_id.city"><span t-esc="o.partner_id.city"/>,
+                                </t>
+                                <t t-if="o.partner_id.state_id"><span t-esc="o.partner_id.state_id.name"/>.
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:bottom;">
+                                Invoice No
+                            </td>
+                            <td style="vertical-align:bottom;padding-left:3pt">:</td>
+                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
+                                <t t-esc="o.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt">Invoice Date</td>
+                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
+                            <td style="vertical-align:bottom;text-align:right;padding-top:5pt;padding-bottom:3pt;padding-right:3pt">
+                                <t t-esc="o.invoice_date"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt">Due Date</td>
+                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
+                            <td style="vertical-align:bottom;text-align:right;padding-top:5pt;padding-bottom:3pt;padding-right:3pt">
+                                <t t-esc="o.invoice_date_due"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="margin-top:5pt;padding:5pt;border-bottom:1pt dashed black;font-size:9pt">
+                        <colgroup>
+                            <col width='28%'/>
+                            <col width='30%'/>
+                            <col width='38%'/>
+                        </colgroup>
+                        <tr>
+                            <th style="border-bottom:1pt dashed black;vertical-align:bottom; margin-bottom:5pt;padding-bottom:3pt;">
+                                <br/>ITEM NAME
+                            </th>
+
+                            <th style="border-bottom:1pt dashed black;vertical-align:bottom;text-align:right;margin-bottom:5pt;padding-bottom:3pt;">
+                                <br/>QTY
+                            </th>
+
+                            <th style="border-bottom:1pt dashed black;vertical-align:bottom;text-align:right;margin-bottom:5pt;padding-bottom:3pt;">
+                                <br/>AMOUNT
+                            </th>
+                        </tr>
+                        <tr t-foreach="o.invoice_line_ids" t-as="orderline" style="margin-top:5pt">
+
+                            <td style="padding-bottom:3pt;padding-top:2pt;vertical-align:top">
+                                <t t-esc="orderline.name"/>
+                                <t t-if="orderline.discount">
+                                    <span>with a</span>
+                                    <t t-esc="orderline.discount"/>
+                                    <span>%</span>
+                                    <span>&amp;nbsp;</span>
+                                    <span>discount</span>
+                                </t>
+                            </td>
+                            <td style="text-align:right;padding-bottom:3pt;padding-top:2pt;vertical-align:top"
+                                class="pos-right-align">
+                                <t t-esc="orderline.quantity"/>
+                            </td>
+                            <td style="text-align:right;padding-bottom:3pt;padding-top:2pt;vertical-align:top">
+                                <span t-esc="orderline.price_subtotal"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="border-bottom:1pt dashed black;font-size:9pt" class='receipt-total'>
+                        <colgroup>
+                            <col width='24%'/>
+                            <col width='1%'/>
+                            <col width='56%'/>
+                            <col width='1%'/>
+                            <col width='18%'/>
+                        </colgroup>
+                        <tr>
+                            <td style="padding-bottom:5pt;padding-top:5pt">Subtotal</td>
+                            <td>
+                                <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+                            </td>
+                            <td style="padding-bottom:5pt;padding-top:5pt">:</td>
+                            <td class="text-right o_price_total"
+                                style="text-align:right;padding-bottom:5pt;padding-top:5pt;padding-right:6pt">
+                                <span t-esc="o.amount_untaxed"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+
+
+                        <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                            <tr>
+                                <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) == 1 and o.amount_untaxed == amount_by_group[2]">
+                                    <td style="padding-bottom:5pt;padding-top:5pt">
+                                        <t t-esc="amount_by_group[0]"/>
+                                        <span>&amp;nbsp;
+                                            <span>on</span>
+                                            <t t-esc="amount_by_group[4]"/>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+                                    </td>
+                                    <td style="padding-bottom:5pt;padding-top:5pt">:</td>
+                                    <td style="text-align:right;padding-bottom:5pt;padding-top:5pt;padding-right:6pt">
+                                        <t t-esc="amount_by_group[3]"/>
+                                    </td>
+                                </t>
+                                <t t-else="">
+                                    <td style="padding-bottom:5pt;padding-top:5pt">
+                                        <t t-esc="amount_by_group[0]"/>
+                                        <span>&amp;nbsp;
+                                            <span>on</span>
+                                            <t t-esc="amount_by_group[4]"/>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+                                    </td>
+                                    <td style="padding-bottom:5pt;padding-top:5pt">:</td>
+                                    <td class="text-right o_price_total">
+                                        <span t-esc="amount_by_group[3]"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                        <tr style="border-bottom:1pt dashed black; width:100%">
+                            <td style="padding-bottom:5pt;">TOTAL</td>
+                            <td>
+                                <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+                            </td>
+                            <td style="padding-bottom:5pt">:</td>
+                            <td class="text-right o_price_total"
+                                style="font-weight:bold;text-align:right;padding-bottom:5pt;padding-right:6pt">
+                                <span t-esc="o.amount_total"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_small_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                       t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="thermal_invoice.report_invoice_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

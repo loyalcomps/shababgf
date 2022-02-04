@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <template id="delivery_note_template_document">
+
+            <style type="text/css">
+                .Row {
+                display: table;
+                width: 100%; /*Optional*/
+                }
+
+                @font-face {
+                font-family: 'calibri';
+                src: url('/arabic_invoice_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                }
+
+                @font-face {
+                font-family: 'Times New Roman';
+                src: local('Times New Roman'), local('Times New Roman'),
+                url(/arabic_invoice_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                }
+
+                @font-face {
+                font-family: 'Arial';
+                src: local('Arial'), local('Arial'),
+                url(/arabic_invoice_print/static/src/fonts/arial.ttf') format('truetype');
+                }
+                @font-face {
+                font-family: 'Verdana';
+                src: local('Verdana'), local('Verdana'),
+                url(/arabic_invoice_print/static/src/fonts/verdana.ttf') format('ttf');
+                }
+
+                .arabic-font {
+                font-family: arial;
+                }
+
+                .en-font {
+                font-family: Verdana;
+                }
+                .arabic_calibri{
+                font-family: calibri;
+                }
+                th, td {
+                padding: 3px;
+                }
+                tr{
+                page-break-inside: avoid;
+                }
+            </style>   <!-- closed template style-->
+
+            <!--         <t t-if="not o" t-set="o" t-value="doc"/>-->
+            <!--            <t t-if="not company">-->
+            <!--                &lt;!&ndash; Multicompany &ndash;&gt;-->
+            <!--                <t t-if="company_id">-->
+            <!--                    <t t-set="company" t-value="company_id"/>-->
+            <!--                </t>-->
+            <!--                <t t-elif="o and 'company_id' in o">-->
+            <!--                    <t t-set="company" t-value="o.company_id.sudo()"/>-->
+            <!--                </t>-->
+            <!--                <t t-else="else">-->
+            <!--                    <t t-set="company" t-value="res_company"/>-->
+            <!--                </t>-->
+            <!--            </t>-->
+
+            <!--_______________ open header_________________________________-->
+            <div class="header" height="20px;">
+
+                <style type="text/css">
+                    .Row {
+                    display: table;
+                    width: 100%; /*Optional*/
+                    }
+
+                    @font-face {
+                    font-family: 'calibri';
+                    src: url('/arabic_invoice_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                    }
+
+                    @font-face {
+                    font-family: 'Times New Roman';
+                    src: local('Times New Roman'), local('Times New Roman'),
+                    url(/arabic_invoice_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                    }
+
+                    @font-face {
+                    font-family: 'Arial';
+                    src: local('Arial'), local('Arial'),
+                    url(/arabic_invoice_print/static/src/fonts/arial.ttf') format('truetype');
+                    }
+                    @font-face {
+                    font-family: 'Verdana';
+                    src: local('Verdana'), local('Verdana'),
+                    url(/arabic_invoice_print/static/src/fonts/verdana.ttf') format('ttf');
+                    }
+
+                    .arabic-font {
+                    font-family: arial;
+                    }
+
+                    .en-font {
+                    font-family: Verdana;
+                    }
+                    .arabic_calibri{
+                    font-family: calibri;
+                    }
+                    th, td {
+                    padding: 3px;
+                    }
+                    tr{
+                    page-break-inside: avoid;
+                    }
+                </style>   <!-- closed header style-->
+
+                <!-- Add 1 row for setting logo in header-->
+                <div style="height:100px;">
+                    <!--                    <div class="text-center" style="float:center;">-->
+                    <!-- <img style="width:100%;float:center;height=20px;" -->
+                    <img style="width:30%;float:right;height:100%;"
+
+                         t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.header_image)"/>
+                    <!--                    </div>-->
+                </div>
+                <br/>
+                <!-- closed -->
+
+                <div class="row" style="float:center;">
+
+
+                     <div class="col-4" style="width:45%;float:left;">
+
+                               <table  style="border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 14px;"><td style="width:30%;"><b class="en-font" style="font-size: 14px;">Address</b> </td>
+                                      <td style="width:2%;"><span class="en-font">:</span></td>
+                                      <td style="width:68%;"><b class="en-font" style="font-size: 14px;">
+                                            <t t-esc="o.company_id.partner_id.street"/>
+                                      </b>
+                                           <br/>
+                                          <b class="en-font" style="font-size: 14px;">
+                                           <t t-esc="o.company_id.partner_id.street2"/>
+                                          </b>
+                                      </td></tr>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 14px;"><td style="width:30%;"><b class="en-font" style="font-size: 14px;">City</b> </td>
+                                      <td style="width:2%;"><span class="en-font">:</span></td>
+
+                                      <td style="width:68%;">
+                                          <b class="en-font" style="font-size: 14px;">
+                                                <t t-esc="o.company_id.partner_id.city"/>
+                                          </b>
+                                      </td></tr>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 14px;"><td style="width:30%;"><b class="en-font" style="font-size: 14px;">Phone No</b> </td>
+                                      <td style="width:2%;"><span class="en-font">:</span></td>
+
+                                      <td style="width:68%;">
+                                          <b class="en-font" style="font-size: 14px;">
+                                               <t t-esc="o.company_id.partner_id.mobile"/>
+                                          </b>
+                                      </td></tr>
+                              </tbody>
+                               </table>
+
+
+                             </div>
+
+
+
+
+
+
+                    <!-- column 2 for VAT NAME-->
+
+                    <div class="col-4" style="font-weight:bold;float:center;">
+
+
+                        <div class="arabic-font" style="text-align: center;font-size : 22px; font-weight: 900;">
+                            <b>مذكرة تسليم</b>
+                        </div>
+
+
+                        <div class="en-font"
+                             style="font-family: 'font-a-bold';float:center;text-align:center;text-decoration: underline; margin-top:-9px;font-size : 22px; font-weight: 900;text-weight:bold;">
+                            <b>DELIVERY NOTE</b>
+                        </div>
+
+                    </div>
+
+                       <div class="col-4" style="width:45%;float:right; text-align:right;">
+
+                               <table  style="border:none;border: 0;font-size: 16px;text-weight:bold; width:100%;">
+                              <tbody>
+                                  <tr style="border:none;border: 0;width:100%;line-height: 14px;"><td style="width:68%;">
+                                      <b class="arabic-font" style="font-size: 14px;">    <t t-esc="o.company_id.partner_id.street1_arabic"/>
+                                      <br/>
+                                           <t t-esc="o.company_id.partner_id.street2_arabic"/>
+                                      </b>
+
+                                  </td>
+                                      <td style="width:2%;"><span class="arabic-font">:</span></td>
+                                      <td style="width:30%;"><b class="arabic-font" style="font-size: 14px;text-align:right;">
+                                           عنوان
+                                      </b>
+
+                                      </td></tr>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 14px;"><td style="width:68%;">
+                                       <b class="arabic-font" style="font-size: 14px;"> <t t-esc="o.company_id.partner_id.city_arabic"/></b> </td>
+                                      <td style="width:2%;"><span class="arabic-font">:</span></td>
+
+                                      <td style="width:30%;">
+                                          <b class="arabic-font" style="font-size: 14px; text-align:right;">
+                                                مدينة
+                                          </b>
+                                      </td></tr>
+                                   <tr style="border:none;border: 0;width:100%;line-height: 14px;"><td style="width:68%;">
+                                       <b class="arabic-font" style="font-size: 14px;">    <t t-esc="o.company_id.partner_id.mobile_name_arabic"/></b> </td>
+                                      <td style="width:2%;"><span class="arabic-font">:</span></td>
+
+                                      <td style="width:30%;">
+                                          <b class="arabic-font" style="font-size: 14px; text-align:right;">
+                                               رقم الهاتف
+                                          </b>
+                                      </td></tr>
+                              </tbody>
+                               </table>
+
+
+                             </div>
+
+
+
+                </div>  <!-- closed 1 row in header-->
+
+                <div class="row" t-att-style="'color: %s;' % o.company_id.primary_color">  <!-- open 2 nd row for vat name and invoice name in header-->
+                    <div class="col-6" style="text-weight:bold;float:left;text-align:left;font-size:14px;">
+                        <b class="en-font" t-att-style="'color: %s;' % o.company_id.primary_color">VAT NO. :
+                            <t t-esc="o.company_id.partner_id.vat"/>
+                        </b>
+                    </div>
+                    <div class="col-6" style="text-weight:bold;float:right;text-align:right;font-size:14px;">
+                        <b class="en-font" t-att-style="'color: %s;' % o.company_id.primary_color">DEL NO.:
+                            <t t-esc="o.name"/>
+                        </b>
+                    </div>
+                </div>
+
+                <table class="table table-sm" style=" table-layout:fixed;font-size: 11px;margin-top:10px;">
+                    <thead>
+                        <tr t-att-style="'background-color: %s;' % o.company_id.primary_color">
+                            <th class="en-font" width="35px"
+                                style="text-align:center;padding-top:3px; font-size: 12px; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+                                <b>Customer</b>
+                            </th>
+                            <th class="arabic-font" width="35px"
+                                style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold;font-size: 12px; ">
+                                <b>العميل</b>
+                            </th>
+
+
+                            <th width="14px"
+                                style="text-align:center;font-size: 12px;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+                                <span class="arabic-font">تاريخ الفتورة</span>
+                                <br/>
+                                <span class="en-font" style="font-size: 12px; text-align: center;text-weight:bold;">
+                                    <b>DEL Date</b>
+                                </span>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3" class="en-font"
+                                style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                <b style="font-size: 12px;text-weight:bold;">
+                                    <t t-if="o.partner_id.parent_id.name">
+                                        <t t-esc="o.partner_id.parent_id.name"/>
+                                    </t>
+                                    <t t-if="not o.partner_id.parent_id.name">
+                                        <t t-if="o.partner_id.name">
+                                            <t t-esc="o.partner_id.name"/>
+                                        </t>
+                                    </t>
+                                </b>
+                                <br/>
+                                <br/>
+                                <t t-if="o.partner_id.street">
+                                    <t t-esc="o.partner_id.street"/>
+                                    <br/>
+                                </t>
+                                <t t-if="o.partner_id.street2">
+                                    <t t-esc="o.partner_id.street2"/>
+                                    <br/>
+                                </t>
+                                <t t-if="o.partner_id.city">
+                                    <t t-esc="o.partner_id.city"/>,
+                                </t>
+                                <t t-if="o.partner_id.state_id.name">
+                                    <t t-esc="o.partner_id.state_id.name"/>,
+                                    <br/>
+                                </t>
+                                <t t-if="o.partner_id.country_id.name">
+                                    <t t-esc="o.partner_id.country_id.name"/>,
+                                </t>
+                                <t t-if="o.partner_id.zip">
+                                    <t t-esc="o.partner_id.zip"/>.
+                                </t>
+                                Tel:
+                                <t t-if="o.partner_id.phone">
+                                    <t t-esc="o.partner_id.phone"/>
+                                </t>
+                                <br/>
+                                Mobile No.:
+                                <t t-if="o.partner_id.mobile">
+                                    <t t-esc="o.partner_id.mobile"/>
+                                </t>
+                                <br/>
+
+
+                                <!--                                      <t t-esc="o.partner_id.vat"/>-->
+                                <!--                                    </t>-->
+                                <!--                                    CR:<t t-if="o.partner_id.cr_number">-->
+                                <!--                                       <t t-esc="o.partner_id.cr_number"/>-->
+                                <!--                                    </t>-->
+                                <!--                                    <br/>-->
+                                <!--                                    VAT:<t t-if="o.partner_id.vat">-->
+                                <!--                                      <t t-esc="o.partner_id.vat"/>-->
+                                <!--                                    </t>-->
+                                <!--                                    <div t-field="o.partner_id.vat"/>-->
+                            </td>
+                            <td rowspan="3" class="arabic-font"
+                                style="border: 1px !important; border-style: solid !important; border-color: #fff !important;text-align:right;">
+                                <b class="arabic-font">
+                                    <div class="arabic-font" style="font-size: 12px;text-weight:bold;"
+                                         t-field="o.partner_id.name_arabic"/>
+                                </b>
+                                <br/>
+
+                                <div class="arabic-font" style="font-size: 12px;"
+                                     t-field="o.partner_id.street1_arabic"/>
+                                <div class="arabic-font" style="font-size: 12px;"
+                                     t-field="o.partner_id.street2_arabic"/>
+                                 <t t-if="o.partner_id.city" class="arabic-font">
+                                    <t t-esc="o.partner_id.city_arabic"/>,
+                                </t>
+                                  <t t-if="o.partner_id.country_id.name" class="arabic-font">
+                                    <t t-esc="o.partner_id.country_arabic"/>,
+                                </t>
+                                <t class="arabic-font" t-if="o.partner_id.phone_name_arabic">
+                                    <t t-esc="o.partner_id.phone_name_arabic"/>
+                                </t>
+                                <br/>
+                                <t class="arabic-font" t-if="o.partner_id.mobile_name_arabic">
+                                    <t t-esc="o.partner_id.mobile_name_arabic"/>
+                                </t>
+                                <br/>
+<!--                                <b style="font-size: 11px;text-weight:bold;">-->
+<!--                                    <t class="arabic-font" t-if="o.partner_id.vat_name_arabic">-->
+<!--                                        <t t-esc="o.partner_id.vat_name_arabic"/>-->
+<!--                                    </t>-->
+<!--                                </b>-->
+
+
+                            </td>
+
+
+                            <td class="en-font"
+                                style="text-align:center;border: 1px !important; border-style: solid !important; text-weight:bold;border-color: #fff !important;">
+                                <div style="text-weight:bold;font-weight:bold;" t-field="o.scheduled_date"/>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+            <!--____________________ closed header____________________________-->
+
+
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="page">
+                    <style type="text/css">
+                        .Row {
+                        display: table;
+                        width: 100%; /*Optional*/
+                        }
+
+                        @font-face {
+                        font-family: 'calibri';
+                        src: url('/arabic_invoice_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                        }
+
+                        @font-face {
+                        font-family: 'Times New Roman';
+                        src: local('Times New Roman'), local('Times New Roman'),
+                        url(/arabic_invoice_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                        }
+
+                        @font-face {
+                        font-family: 'Arial';
+                        src: local('Arial'), local('Arial'),
+                        url(/arabic_invoice_print/static/src/fonts/arial.ttf') format('truetype');
+                        }
+                        @font-face {
+                        font-family: 'Verdana';
+                        src: local('Verdana'), local('Verdana'),
+                        url(/arabic_invoice_print/static/src/fonts/verdana.ttf') format('ttf');
+                        }
+
+                        .arabic-font {
+                        font-family: arial;
+                        }
+
+                        .en-font {
+                        font-family: Verdana;
+                        }
+                        .arabic_calibri{
+                        font-family: calibri;
+                        }
+                        th, td {
+                        padding: 3px;
+                        }
+                        tr{
+                        page-break-inside: avoid;
+                        }
+                    </style>
+
+                    <div class="oe_structure"/>
+
+
+                    <div>
+
+
+                        <!-- Is there a discount on at least one line? -->
+<!--                        <t t-set="display_discount" t-value="any([l.discount for l in o.move_ids_without_package])"/>-->
+
+                        <table class="table table-sm" style="table-layout:fixed;font-size: 11px;" cellspacing="0">
+                            <thead>
+                                <tr t-att-style="'background-color: %s;' % o.company_id.primary_color">
+                                    <th width="8px"
+                                        style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center;">
+                                        <span class="arabic-font">رقم متسلسل</span>
+                                        <br/>
+                                        <span class="en-font">Sl No.</span>
+                                    </th>
+                                    <th width="60px" class="en-font"
+                                        style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center;vertical-align:middle;">
+                                        <span class="arabic-font">وصف</span>
+                                        <br/>
+                                        <span class="en-font">Product</span>
+                                    </th>
+
+
+                                    <th width="8px"
+                                        style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center">
+                                        <span class="arabic-font">وحدة قياس</span>
+                                        <br/>
+                                        <span class="en-font">UOM</span>
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.move_ids_without_package" t-as="l">
+                                    <td style="text-align:center;" class="en-font">
+                                        <t t-esc="l_index+1"/>
+                                    </td>
+
+                                    <td style="line-height: 1;">
+
+                                        <div>
+                                              <span class="en-font" style="float: left;">
+                                                  <t t-esc="l.product_id.name"/>
+                                              </span>
+                                              <span class="arabic-font" style="float: right;padding:2px;">
+                                                   <t t-esc="l.product_id.name_arabic"/>
+                                              </span>
+                                              <div style="clear:both;"></div>
+<!--                                            <div class="clear"></div>-->
+                                        </div>
+
+<!--                                        <div class="en-font" style="text-align:left;">-->
+<!--                                            <t t-esc="l.product_id.name"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="arabic-font" style="text-align:right;margin-top:5px;">-->
+<!--                                            <t t-esc="l.product_id.name_arabic"/>-->
+<!--                                        </div>-->
+                                    </td>
+
+
+
+                                    <td class="text-center en-font">
+                                        <t t-esc="l.product_uom.name"/>
+                                    </td>
+
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                    <div style="padding-top:10px;margin-top:10px;font-size: 11px;height:20px;">
+                    </div>
+<!--                                         <br/><br/>-->
+
+                <div class="footer" style=" padding-top: 10px; margin-top: 10px;margin-left:10px box-sizing: border-box;">
+<!--                 ______________open Footer________________________-->
+                <style type="text/css">
+                    .Row {
+                    display: table;
+                    width: 100%; /*Optional*/
+                    }
+
+                    @font-face {
+                    font-family: 'calibri';
+                    src: url('/arabic_invoice_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                    }
+
+                    @font-face {
+                    font-family: 'Times New Roman';
+                    src: local('Times New Roman'), local('Times New Roman'),
+                    url(/arabic_invoice_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                    }
+
+                    @font-face {
+                    font-family: 'Arial';
+                    src: local('Arial'), local('Arial'),
+                    url(/arabic_invoice_print/static/src/fonts/arial.ttf') format('truetype');
+                    }
+                    @font-face {
+                    font-family: 'Verdana';
+                    src: local('Verdana'), local('Verdana'),
+                    url(/arabic_invoice_print/static/src/fonts/verdana.ttf') format('ttf');
+                    }
+
+                    .arabic-font {
+                    font-family: arial;
+                    }
+
+                    .en-font {
+                    font-family: Verdana;
+                    }
+                    .arabic_calibri{
+                    font-family: calibri;
+                    }
+                    th, td {
+                    padding: 3px;
+                    }
+                    tr{
+                        page-break-inside: avoid;
+                        }
+                </style>
+
+
+
+
+
+
+
+                            <div class="col-12" style="margin-left:-16px;position:absolute;text-align:center;align:center;margin-top:10px; float:center;" >
+                             <img style="width:100%;float:center;height:90px"
+                             t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.footer_image)"/>
+                                <br/>
+                             </div>
+
+<!--   <br/>-->
+                <div class="col-12" style=" position:absolute;height:15px; text-align:center;align:center;width:100%;margin-top:120px; float:center; font-size:14px;" >
+                     <b class="en-font" style="font-size: 12px;text-align:center;width:100%;float:center;">Page <span class="page"/> of <span class="topage"/></b>
+
+                </div>
+
+
+
+
+
+</div>
+
+            </t>
+        </template>
+
+
+        <template id="delivery_note_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <!--                  <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>-->
+                    <t t-call="delivery_note_print.delivery_note_template_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

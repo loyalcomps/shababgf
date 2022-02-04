@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_stitching_report_view">
+<!--        <t t-call="web.html_container">-->
+
+<!--            <t t-call="web.external_layout">-->
+<!--                <div class="page">-->
+<!--                    <style type="text/css">-->
+<!--                        .tdCenter{text-align:center;padding: 5px;border:1px solid #000000;}-->
+<!--                        .tdLeft{text-align:left;padding: 5px;border:1px solid #000000;}-->
+<!--                        .tdRight{text-align:right;padding: 5px;border:1px solid #000000;}-->
+<!--                        .bold{font-weight: bold; }-->
+<!--&lt;!&ndash;                        .line-height35{line-height: 35px;}&ndash;&gt;-->
+<!--                        .blue{ background-color: #e2e8e8;}-->
+<!--                        .bghead{background-color: #7b0b5b;color: #ffffff;}-->
+<!--                        .bgcolor{background-color: #929393;color: #ffffff;}-->
+<!--                    </style>-->
+<!--                    <div class="row">-->
+
+<!--                        <div class="col-xl-12"-->
+<!--                             style="text-align: center;font-family:Calibri !important;">-->
+<!--                            <t>-->
+<!--                                <img t-if="res_company.logo"-->
+<!--                                     t-att-src="'data:image/png;base64,%s' %res_company.logo" class="center"-->
+<!--                                     style="height: 80px;width: 80px;"/>-->
+<!--                            </t>-->
+<!--                            <br/>-->
+<!--                            <span style="color:green;font-size:18px;font-weight: bold;">-->
+<!--                                <t t-esc="res_company.name"/>-->
+<!--                            </span>-->
+<!--                            <br/>-->
+<!--                            <span style="font-size:13px;font-weight: bold;">-->
+<!--                                <t t-if="res_company.street">-->
+<!--                                    <t t-esc="res_company.street"/>,-->
+<!--                                </t>-->
+<!--                                <t t-if="res_company.street2">-->
+<!--                                    <t t-esc="res_company.street2"/>-->
+
+<!--                                </t>-->
+
+<!--                                <t t-if="res_company.city">-->
+<!--                                    <br/>-->
+<!--                                    <t t-esc="res_company.city"/>-->
+<!--                                </t>-->
+
+<!--                                <t t-if="res_company.state_id">-->
+<!--                                    <br/>-->
+<!--                                    <t t-esc="res_company.state_id.name"/>,-->
+<!--                                </t>-->
+<!--                                <t t-if="res_company.zip">-->
+<!--                                    <t t-esc="res_company.zip"/>,-->
+<!--                                </t>-->
+<!--                                <t t-if="res_company.country_id">-->
+<!--                                    <t t-esc="res_company.country_id.name"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="res_company.email">-->
+<!--                                    .EMAIL - -->
+<!--                                    <t t-esc="res_company.email"/>-->
+<!--                                </t>-->
+<!--                            </span>-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="row">-->
+<!--                        <div class="col-xl-12"-->
+<!--                             style="text-align: center;font-size:16px;font-family:Calibri !important;color:red;font-weight: bold;">-->
+<!--                           Stitching sale Report-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="col-xl-12" width="100%">-->
+<!--                        <table cellpading="0" cellspacing="0" border="0" width="100%">-->
+
+<!--                             <b style="font-size:18px;"> Start Date : <t t-esc="date_start"/> <![CDATA[&nbsp;]]>-->
+<!--                                End Date : <t t-esc="date_end"/> </b>-->
+<!--                           <br/><br/>-->
+<!--                        </table>-->
+
+<!--                    </div>-->
+
+<!--                     <t t-set="sub_total_val" t-value="0"/>-->
+
+<!--                        <table style="width:100%">-->
+<!--                        <thead>-->
+<!--                            <tr class="text-center">-->
+
+<!--                                <th style="width:5%;padding:3px;font-size:12px;" class="tdCenter bghead">Sl No.</th>-->
+<!--                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Order</th>-->
+<!--                                <th style="width:30%;padding:3px;font-size:12px;" class="tdCenter bghead">Date</th>-->
+<!--                                <th style="width:10%;padding:3px;font-size:12px;" class="tdCenter bghead">Customer</th>-->
+<!--                                <th style="width:7%;padding:3px;font-size:12px;" class="tdCenter bghead">Total</th>-->
+
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+
+
+<!--                            <t t-foreach="get_sale" t-as="line_ids" >-->
+<!--                                        <tr style="page-break-inside: avoid;">-->
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">-->
+<!--                                                <span t-esc="line_ids['sl_no']"/>-->
+<!--                                            </td>-->
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">-->
+<!--                                                <span t-esc="line_ids['order']"/>-->
+<!--                                            </td>-->
+<!--                                              <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">-->
+<!--                                                <span t-esc="line_ids['date']"/>-->
+<!--                                            </td>-->
+
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">-->
+
+<!--                                               <span t-esc="line_ids['customer']"/>-->
+<!--                                            </td>-->
+
+<!--                                             <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">-->
+<!--                                                 <span t-esc="'{0:,.2f}'.format(float(line_ids['sub_total']))"/>-->
+<!--                                                <t t-set="sub_total_val" t-value="sub_total_val + line_ids['sub_total']" />-->
+<!--                                            </td>-->
+
+
+
+<!--                                        </tr>-->
+
+<!--                                    </t>-->
+<!--                        <tr >-->
+
+<!--                             <td colspan="4" style="text-align:center;border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">-->
+<!--                                <span><b>Total</b></span>-->
+<!--                            </td>-->
+
+<!--                             <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">-->
+<!--                                <b> <t t-esc="'{0:,.2f}'.format(float(sub_total_val))" /></b>-->
+<!--                            </td>-->
+
+<!--                        </tr>-->
+
+
+
+<!--                        </tbody>-->
+<!--                    </table>-->
+
+
+
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+
+
+          <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <style>
+                    .table, .table td, .table th {
+                      border: 1px solid #ddd;
+                      text-align: left;
+                    }
+
+                    .table {
+                      border-collapse: collapse;
+                      width: 100%;
+                    }
+
+                    .table th, .table td {
+                      padding: 10px;
+                    }
+
+                    .salesperson{
+                        padding: 50px
+                    }
+                    .tdCenter{text-align:center;padding: 5px;border:1px solid #000000;}
+                        .tdLeft{text-align:left;padding: 5px;border:1px solid #000000;}
+                        .tdRight{text-align:right;padding: 5px;border:1px solid #000000;}
+                        .bold{font-weight: bold; }
+<!--                        .line-height35{line-height: 35px;}-->
+                        .blue{ background-color: #e2e8e8;}
+                        .bghead{background-color: #7b0b5b;color: #ffffff;}
+                        .bgcolor{background-color: #929393;color: #ffffff;}
+                </style>
+
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <center>
+                        <b>
+                            <h3>Stitching Sale Report</h3>
+                        </b>
+                    </center>
+                    <center>
+                        <b>
+                            <span t-esc="date_start"/>
+                            To
+                            <span t-esc="date_end"/>
+                        </b>
+                    </center>
+                    <br/>
+
+                    <b>
+                           Operating Unit: <span t-esc="operating_unit"/>
+
+                        </b>
+                    <br/>
+
+
+                <t t-if="not cutting_user and not stitching_user">
+                    <t t-set="sub_total_val" t-value="0"/>
+
+                        <table style="width:100%:">
+                        <thead>
+                            <tr class="text-center">
+
+                                <th style="width:5%;padding:3px;font-size:12px;" class="tdCenter bghead">Sl.</th>
+                                <th style="width:10%;padding:3px;font-size:12px;" class="tdCenter bghead">Cutting User</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Cutting Status</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Stitching User</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Stitching Status</th>
+
+                                <th style="width:11%;padding:3px;font-size:12px;" class="tdCenter bghead">Order</th>
+                                <th style="width:14%;padding:3px;font-size:12px;" class="tdCenter bghead">Date</th>
+                                <th style="width:32%;padding:3px;font-size:12px;" class="tdCenter bghead">Customer</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <t t-foreach="get_sale" t-as="line_ids" >
+                                        <tr style="page-break-inside: avoid;">
+                                            <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['sl_no']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['cutting_user']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['cutting_completed']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['stitching_user']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['stitching_completed']"/>
+                                            </td>
+
+
+
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['order']"/>
+                                            </td>
+                                              <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">
+                                                <span t-esc="line_ids['date']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+
+                                               <span t-esc="line_ids['customer']"/>
+                                            </td>
+
+                                             <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">
+                                                 <span t-esc="'{0:,.2f}'.format(float(line_ids['total']))"/>
+                                                <t t-set="sub_total_val" t-value="sub_total_val + line_ids['total']" />
+                                            </td>
+
+
+
+                                        </tr>
+
+                                    </t>
+                        <tr >
+
+                             <td colspan="8" style="text-align:center;border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                <span><b>Total</b></span>
+                            </td>
+
+                             <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">
+                                <b> <t t-esc="'{0:,.2f}'.format(float(sub_total_val))" /></b>
+                            </td>
+
+                        </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </t>
+
+                     <t t-if="selection_user=='cutting_user'">
+                    <t t-set="sub_total_val" t-value="0"/>
+
+                          <b>
+                            Cutting User: <span t-esc="cutting_user"/>
+                        </b>
+
+                        <table style="width:100%">
+                        <thead>
+                            <tr class="text-center">
+
+                                <th style="width:5%;padding:3px;font-size:12px;" class="tdCenter bghead">Sl.</th>
+<!--                                <th style="width:10%;padding:3px;font-size:12px;" class="tdCenter bghead">Cutting User</th>-->
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Cutting Status</th>
+<!--                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Stitching User</th>-->
+<!--                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Stitching Status</th>-->
+
+                                <th style="width:11%;padding:3px;font-size:12px;" class="tdCenter bghead">Order</th>
+                                <th style="width:14%;padding:3px;font-size:12px;" class="tdCenter bghead">Date</th>
+                                <th style="width:32%;padding:3px;font-size:12px;" class="tdCenter bghead">Customer</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <t t-foreach="get_sale" t-as="line_ids" >
+                                        <tr style="page-break-inside: avoid;">
+                                            <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['sl_no']"/>
+                                            </td>
+
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">-->
+<!--                                                <span t-esc="line_ids['cutting_user']"/>-->
+<!--                                            </td>-->
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['cutting_completed']"/>
+                                            </td>
+
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">-->
+<!--                                                <span t-esc="line_ids['stitching_user']"/>-->
+<!--                                            </td>-->
+
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">-->
+<!--                                                <span t-esc="line_ids['stitching_completed']"/>-->
+<!--                                            </td>-->
+
+
+
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['order']"/>
+                                            </td>
+                                              <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">
+                                                <span t-esc="line_ids['date']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+
+                                               <span t-esc="line_ids['customer']"/>
+                                            </td>
+
+                                             <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">
+                                                 <span t-esc="'{0:,.2f}'.format(float(line_ids['total']))"/>
+                                                <t t-set="sub_total_val" t-value="sub_total_val + line_ids['total']" />
+                                            </td>
+
+
+
+                                        </tr>
+
+                                    </t>
+                        <tr >
+
+                             <td colspan="5" style="text-align:center;border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                <span><b>Total</b></span>
+                            </td>
+
+                             <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">
+                                <b> <t t-esc="'{0:,.2f}'.format(float(sub_total_val))" /></b>
+                            </td>
+
+                        </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </t>
+
+                    <t t-if="selection_user=='stitching_user'">
+                    <t t-set="sub_total_val" t-value="0"/>
+
+                          <b>
+                           Stitching User: <span t-esc="stitching_user"/>
+                        </b>
+
+                        <table style="width:100%">
+                        <thead>
+                            <tr class="text-center">
+
+                                <th style="width:5%;padding:3px;font-size:12px;" class="tdCenter bghead">Sl.</th>
+                                <th style="width:10%;padding:3px;font-size:12px;" class="tdCenter bghead">Cutting User</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Cutting Status</th>
+<!--                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Stitching User</th>-->
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Stitching Status</th>
+
+                                <th style="width:11%;padding:3px;font-size:12px;" class="tdCenter bghead">Order</th>
+                                <th style="width:14%;padding:3px;font-size:12px;" class="tdCenter bghead">Date</th>
+                                <th style="width:32%;padding:3px;font-size:12px;" class="tdCenter bghead">Customer</th>
+                                <th style="width:12%;padding:3px;font-size:12px;" class="tdCenter bghead">Total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <t t-foreach="get_sale" t-as="line_ids" >
+                                        <tr style="page-break-inside: avoid;">
+                                            <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['sl_no']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['cutting_user']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['cutting_completed']"/>
+                                            </td>
+
+<!--                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">-->
+<!--                                                <span t-esc="line_ids['stitching_user']"/>-->
+<!--                                            </td>-->
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['stitching_completed']"/>
+                                            </td>
+
+
+
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                                <span t-esc="line_ids['order']"/>
+                                            </td>
+                                              <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">
+                                                <span t-esc="line_ids['date']"/>
+                                            </td>
+
+                                            <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+
+                                               <span t-esc="line_ids['customer']"/>
+                                            </td>
+
+                                             <td style="border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;text-align:center;">
+                                                 <span t-esc="'{0:,.2f}'.format(float(line_ids['total']))"/>
+                                                <t t-set="sub_total_val" t-value="sub_total_val + line_ids['total']" />
+                                            </td>
+
+
+
+                                        </tr>
+
+                                    </t>
+                        <tr >
+
+                             <td colspan="7" style="text-align:center;border: 1px solid black;border-collapse:collapse;padding:3px;font-size:12px;">
+                                <span><b>Total</b></span>
+                            </td>
+
+                             <td style="border: 1px solid black;border-collapse:collapse;text-align:center;padding:3px;font-size:12px;">
+                                <b> <t t-esc="'{0:,.2f}'.format(float(sub_total_val))" /></b>
+                            </td>
+
+                        </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </t>
+                </div>
+         </t>
+        </t>
+    </template>
+
+
+</odoo>

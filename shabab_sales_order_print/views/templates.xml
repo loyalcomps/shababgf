@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+         <template id="sales_order_print_inherit" inherit_id = "sales_order_print.arabic_sale_order_print_template_document" >
+        <xpath expr="//div[hasclass('page')]/div/table/thead/tr/th[2]" position="after">
+
+             <th width="15px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center">
+                                        <span class="arabic-font">الطول </span>
+                                        <br/>
+                                        <span class="en-font">Length(CM)</span>
+                                    </th>
+
+             <th width="15px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center">
+                                        <span class="arabic-font">العرض</span>
+                                        <br/>
+                                        <span class="en-font">Width(CM)</span>
+                                    </th>
+
+            <th width="15px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center">
+                                        <span class="arabic-font">قطع</span>
+                                        <br/>
+                                        <span class="en-font">Pcs</span>
+                                    </th>
+
+
+
+        </xpath>
+
+              <xpath expr="//div[hasclass('page')]/div/table/tbody/tr/td[2]" position="after">
+                   <td class="text-center en-font">
+                          <t t-esc="l.length"/>
+                   </td>
+
+                   <td class="text-center en-font">
+                          <t t-esc="l.width"/>
+                   </td>
+
+                   <td class="text-center en-font">
+                          <t t-esc="l.pcs"/>
+                   </td>
+              </xpath>
+
+               <xpath expr="//div[hasclass('page')]/div/table/tbody/tr/td[2]" position="replace">
+                     <td style="line-height: 1;">
+                                        <div class="en-font" style="text-align:left;">
+                                            <t t-esc="l.name"/>
+                                        </div>
+                                        <div class="arabic-font" style="text-align:right;margin-top:5px;">
+                                            <t t-esc="l.product_id.name_arabic"/>
+                                        </div>
+                                    </td>
+               </xpath>
+
+
+        </template>
+
+    </data>
+</odoo>

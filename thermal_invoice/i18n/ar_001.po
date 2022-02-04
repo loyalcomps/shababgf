@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* thermal_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-05 06:50+0000\n"
+"PO-Revision-Date: 2020-09-05 06:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "&amp;nbsp;\n"
+"                                            <span>on</span>"
+msgstr "&amp;nbsp;\n"
+"                                            <span>على</span>"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<br/>AMOUNT"
+msgstr "<br/>كمية"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<br/>ITEM NAME"
+msgstr "<br/>اسم العنصر"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<br/>QTY"
+msgstr "<br/>الكمية"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<span>%</span>\n"
+"                                    <span>&amp;nbsp;</span>\n"
+"                                    <span>discount</span>"
+msgstr "<span>%</span>\n"
+"                                    <span>&amp;nbsp;</span>\n"
+"                                    <span>خصم</span>"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>"
+msgstr ""
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<span>&amp;nbsp;&amp;nbsp;</span>"
+msgstr ""
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "<span>with a</span>"
+msgstr "<span>مع</span>"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "Customer"
+msgstr "العميل"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "Due Date"
+msgstr "تاريخ الاستحقاق"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "Invoice Date"
+msgstr "تاريخ الفاتورة"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "Invoice No"
+msgstr "رقم الفاتورة"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.small_external_layout
+msgid "Page:\n"
+"                        <span class=\"page\"/>\n"
+"                        of\n"
+"                        <span class=\"topage\"/>"
+msgstr "الصفحة:\n"
+"                        <span class=\"الصفحة\"/>\n"
+"                        of\n"
+"                        <span class=\"إلى الصفحة\"/>"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "Subtotal"
+msgstr "الإجمالي الفرعي"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "TOTAL"
+msgstr "مجموع"
+
+#. module: thermal_invoice
+#: model:ir.actions.report,name:thermal_invoice.account_invoice_small
+msgid "Thermal Invoice"
+msgstr "الفاتورة الحرارية"
+
+#. module: thermal_invoice
+#: model:ir.actions.report,name:thermal_invoice.account_invoice_small
+msgid "Small Invoices -%s"
+msgstr "فواتير صغيرة -%s"
+
+#. module: thermal_invoice
+#: model_terms:ir.ui.view,arch_db:thermal_invoice.report_invoice_document
+msgid "VAT Reg. No :"
+msgstr "رقم التسجيل الضريبي :"
+

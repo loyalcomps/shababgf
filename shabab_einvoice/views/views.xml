@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+    <template id="shabab_advertising_einvoice" inherit_id="arabic_invoice_print.arabic_invoice_template_document">
+            <xpath expr="//div[@name='item_content']/table[@name='invoice_line_details']//tbody//tr//td[2]" position="replace">
+
+                 <td style="line-height: 1;">
+                                        <div class="en-font" style="text-align:left;">
+                                            <t t-esc="l.name"/>
+                                        </div>
+                                        <div class="arabic-font" style="text-align:right;margin-top:5px;">
+                                            <t t-esc="l.product_id.name_arabic"/>
+                                        </div>
+                                    </td>
+
+            </xpath>
+
+        </template>
+  </data>
+</odoo>

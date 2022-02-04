@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+ <record model="ir.ui.view" id="thermal_product_arabic_product_form">
+      <field name="name">product_arabic.product.form</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_normal_form_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[@name='options']" position="before">
+          <label class="oe_edit_only" for="name_arabic" string="Arabic Name"/>
+          <h1>
+            <field name="name_arabic" placeholder="Arabic Name"/>
+          </h1>
+
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
+

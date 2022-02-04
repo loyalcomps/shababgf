@@ -1,0 +1,89 @@
+<odoo>
+  <data>
+       <record id="view_order_stitching_and_cutting" model="ir.ui.view">
+                <field name="name">stitching.sale.order.form.view.with_carrier</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale.view_order_form"/>
+                <field name="arch" type="xml">
+
+                     <xpath expr="//form/header/button[@name='action_cancel']" position="after">
+
+                        <button class="oe_stat_button" name="cutting_completion" type="object" string="Cutting Completed" attrs="{'invisible': ['|',('cutting_completed','=',True),('state','not in',('sale','done'))]}"/>
+
+                         <button class="oe_stat_button" name="stitching_completion" type="object" string="Stitching Completed" attrs="{'invisible': ['|',('cutting_completed','=',False),('state','not in',('sale','done'))]}"/>
+                    </xpath>
+
+                        <xpath expr="//field[@name='partner_id']" position='after'>
+                             <field name="cutting_user" attrs="{'readonly': [('cutting_completed','=',True)],'invisible': [('state','not in',('sale','done'))]}"/>
+                            <field name="stitching_user" attrs="{'readonly': [('stitching_completed','=',True)],'invisible': [('state','not in',('sale','done'))]}"/>
+                            <field name="cutting_completed" readonly="1" attrs="{'invisible': ['|',('cutting_user','=',False),('state','not in',('sale','done'))]}" force_save="1"/>
+                          <field name="stitching_completed" readonly="1" attrs="{'invisible': ['|',('stitching_user','=',False),('state','not in',('sale','done'))]}" force_save="1"/>
+
+                        </xpath>
+                </field>
+       </record>
+
+
+     <record id="view_order_stitching_and_cutting_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit.sale.stock</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='team_id']" position="after">
+                  <field name="cutting_user" attrs="{'readonly': [('cutting_completed','=',True)]}"/>
+                  <field name="stitching_user" attrs="{'readonly': [('stitching_completed','=',True)]}"/>
+                  <field name="cutting_completed"/>
+                  <field name="stitching_completed"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stitching_and_cutting_view_quotation_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit.sale.stitching</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                     <field name="cutting_user" attrs="{'readonly': [('cutting_completed','=',True)]}"/>
+                  <field name="stitching_user" attrs="{'readonly': [('stitching_completed','=',True)]}"/>
+                  <field name="cutting_completed"/>
+                  <field name="stitching_completed"/>
+                </xpath>
+            </field>
+        </record>
+
+
+      <record id="stitching_and_cutting_search_inherit" model="ir.ui.view">
+        <field name="name">sale.order.search.receipt</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+
+             <xpath expr="//search" position="inside">
+
+                    <field name="cutting_user"/>
+                  <field name="stitching_user"/>
+                  <field name="cutting_completed"/>
+                  <field name="stitching_completed"/>
+                    <group expand="0" string="Group By">
+                         <filter string="Cutting User" name="cutting_user" domain="[]" context="{'group_by':'cutting_user'}"/>
+                        <filter string="Stitching User" name="stitching_user" domain="[]" context="{'group_by':'stitching_user'}"/>
+                        <filter string="Cutting Completed" name="cutting_completed" domain="[]" context="{'group_by':'cutting_completed'}"/>
+                     <filter string="Stitching Completed" name="stitching_completed" domain="[]" context="{'group_by':'stitching_completed'}"/>
+                    </group>
+             </xpath>
+<!--            <xpath expr="//filter[@name='my_quotation']" position="after">-->
+<!--                <separator/>-->
+<!--                <filter string="Cutting User" name="cutting_user"/>-->
+<!--                 <separator/>-->
+<!--                   <filter string="Stitching User" name="stitching_user"/>-->
+<!--                 <separator/>-->
+<!--                   <filter string="Cutting Completed" name="cutting_completed"/>-->
+<!--                 <separator/>-->
+<!--                  <filter string="Stitching Completed" name="stitching_completed"/>-->
+<!--                <separator/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+  </data>
+</odoo>

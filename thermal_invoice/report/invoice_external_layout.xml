@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="small_external_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+            <div class="header">
+                <div class="float-right">
+                    <h3 class="mt0 text-right" t-field="company.report_header"/>
+                </div>
+                <center>
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                         style="max-height: 35px; float:center;"/>
+                </center>
+            </div>
+            <div style="margin-top:0px;" class="article din" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer o_background_footer din">
+                <div class="text-right page_number">
+                    <div class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <ul class="list-inline">
+                        <li t-if="company.phone">
+                            <i class="fa fa-phone"/>
+                            <span t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email">
+                            <i class="fa fa-at"/>
+                            <span t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website">
+                            <i class="fa fa-globe"/>
+                            <span t-field="company.website"/>
+                        </li>
+                        <li t-if="company.vat">
+                            <i class="fa fa-building-o"/>
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-field="company.vat"/>
+                        </li>
+                    </ul>
+                    <div t-field="company.report_footer"/>
+                </div>
+            </div>
+        </template>
+
+    </data>
+</odoo>

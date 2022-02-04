@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="delivery_note_print.list">
+      <field name="name">delivery_note_print list</field>
+      <field name="model">delivery_note_print.delivery_note_print</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="delivery_note_print.action_window">
+      <field name="name">delivery_note_print window</field>
+      <field name="res_model">delivery_note_print.delivery_note_print</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="delivery_note_print.action_server">
+      <field name="name">delivery_note_print server</field>
+      <field name="model_id" ref="model_delivery_note_print_delivery_note_print"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="delivery_note_print" id="delivery_note_print.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="delivery_note_print.menu_1" parent="delivery_note_print.menu_root"/>
+    <menuitem name="Menu 2" id="delivery_note_print.menu_2" parent="delivery_note_print.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="delivery_note_print.menu_1_list" parent="delivery_note_print.menu_1"
+              action="delivery_note_print.action_window"/>
+    <menuitem name="Server to list" id="delivery_note_print" parent="delivery_note_print.menu_2"
+              action="delivery_note_print.action_server"/>
+-->
+  </data>
+</odoo>
