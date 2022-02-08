@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="company_arabic_partner_form">
+      <field name="name">res_company_arabic.form</field>
+      <field name="model">res.company</field>
+      <field name="inherit_id" ref="base.view_company_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="logo" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="company_arabic_name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="company_arabic_name"/>
+                        </h1>
+                    </div>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
