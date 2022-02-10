@@ -2,7 +2,7 @@
     <data>
 
          <template id="sales_order_print_inherit" inherit_id = "sales_order_print.arabic_sale_order_print_template_document" >
-        <xpath expr="//div[hasclass('page')]/div/table/thead/tr/th[2]" position="after">
+        <xpath expr="//div[hasclass('page')]/div/table/thead//tr//th[2]" position="after">
 
              <th width="15px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center">
                                         <span class="arabic-font">الطول </span>
@@ -26,7 +26,7 @@
 
         </xpath>
 
-              <xpath expr="//div[hasclass('page')]/div/table/tbody/tr/td[2]" position="after">
+              <xpath expr="//div[hasclass('page')]/div/table/tbody/tr//t//td[2]" position="after">
                    <td class="text-center en-font">
                           <t t-esc="l.length"/>
                    </td>
@@ -40,7 +40,7 @@
                    </td>
               </xpath>
 
-               <xpath expr="//div[hasclass('page')]/div/table/tbody/tr/td[2]" position="replace">
+               <xpath expr="//div[hasclass('page')]/div/table/tbody//tr//t//td[2]" position="replace">
                      <td style="line-height: 1;">
                                         <div class="en-font" style="text-align:left;">
                                             <t t-esc="l.name"/>
@@ -50,6 +50,24 @@
                                         </div>
                                     </td>
                </xpath>
+
+             <xpath expr="//div[hasclass('page')]/div/table/tbody//tr//t[contains(@t-if, 'line_section')]" position="replace">
+
+               <t t-if="l.display_type == 'line_section'">
+                   <td colspan="8">
+                       <span t-field="l.name" t-options="{'widget': 'text'}"/>
+                   </td>
+
+               </t>
+              </xpath>
+               <xpath expr="//div[hasclass('page')]/div/table/tbody//tr//t[contains(@t-if, 'line_note')]" position="replace">
+
+              <t t-if="l.display_type == 'line_note'">
+                  <td colspan="8">
+                      <span t-field="l.name" t-options="{'widget': 'text'}"/>
+                  </td>
+              </t>
+              </xpath>
 
 
         </template>

@@ -53,6 +53,24 @@
                            </t>
                    </td>
               </xpath>
+
+              <xpath expr="//div[@class='page']/div/table[hasclass('table-sm')]//tbody//tr//t[contains(@t-if, 'line_section')]" position="replace">
+
+               <t t-if="l.display_type == 'line_section'">
+                   <td colspan="8">
+                       <span t-field="l.name" t-options="{'widget': 'text'}"/>
+                   </td>
+
+               </t>
+              </xpath>
+              <xpath expr="//div[@class='page']/div/table[hasclass('table-sm')]//tbody//tr//t[contains(@t-if, 'line_note')]" position="replace">
+
+              <t t-if="l.display_type == 'line_note'">
+                  <td colspan="8">
+                      <span t-field="l.name" t-options="{'widget': 'text'}"/>
+                  </td>
+              </t>
+              </xpath>
           </template>
 
 
