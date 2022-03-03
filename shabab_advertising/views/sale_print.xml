@@ -14,6 +14,18 @@
 
 
           <template id="arabic_invoice_report"  inherit_id="arabic_invoice_print.arabic_invoice_template_document">
+              <!--  Added work order number header table-->
+              <xpath expr="//div[@class='header']//table[hasclass('table-sm')]//thead//tr//th[3]" position="replace">
+                  <th width="16px"
+                              style="text-align:center;font-size: 12px;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+                              <span class="arabic-font">رقم العمل</span>
+                              <br/>
+                              <span class="en-font" style="font-size: 12px; text-align:center;text-weight:bold;">
+                                  <b>Work No.</b>
+                              </span>
+                          </th>
+              </xpath>
+              <!-- modified product line table -->
                 <xpath expr="//div[@class='page']/div/table[hasclass('table-sm')]//thead//tr//th[4]" position="after">
                     <th width="7px" style="text-weight:bold;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center">
                         <span class="arabic-font">الطول</span>
@@ -74,18 +86,18 @@
           </template>
 
 
-         <template id="arabic_invoice_report"  inherit_id="arabic_invoice_print.arabic_invoice_template_document">
-                <xpath expr="//div[@class='header']//table[hasclass('table-sm')]//thead//tr//th[3]" position="replace">
-                    <th width="16px"
-                                style="text-align:center;font-size: 12px;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
-                                <span class="arabic-font">رقم العمل</span>
-                                <br/>
-                                <span class="en-font" style="font-size: 12px; text-align:center;text-weight:bold;">
-                                    <b>Work No.</b>
-                                </span>
-                            </th>
-                </xpath>
-         </template>
+         <!-- <template id="arabic_invoice_report"  inherit_id="arabic_invoice_print.arabic_invoice_template_document">
+         <xpath expr="//div[@class='header']//table[hasclass('table-sm')]//thead//tr//th[3]" position="replace">
+             <th width="16px"
+                         style="text-align:center;font-size: 12px;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+                         <span class="arabic-font">رقم العمل</span>
+                         <br/>
+                         <span class="en-font" style="font-size: 12px; text-align:center;text-weight:bold;">
+                             <b>Work No.</b>
+                         </span>
+                     </th>
+         </xpath>
+         </template> -->
 
 
     </data>
